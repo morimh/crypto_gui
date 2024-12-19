@@ -3,11 +3,11 @@ name: Build EXE for Windows
 on:
   push:
     branches:
-      - main  # این به این معنی است که این Workflow وقتی اجرا می‌شود که به شاخه main تغییرات وارد شود
+      - main  # اجرای این اکشن زمانی که به شاخه main ارسال می‌شود
 
 jobs:
   build:
-    runs-on: windows-latest  # این به GitHub Actions می‌گوید که عملیات در یک محیط ویندوز انجام شود
+    runs-on: windows-latest  # استفاده از ویندوز برای ایجاد فایل exe
     steps:
       - name: Checkout code
         uses: actions/checkout@v2  # این مرحله، کدهای شما را از مخزن دانلود می‌کند
@@ -27,7 +27,7 @@ jobs:
           pyinstaller --onefile --windowed crypto_gui.py  # PyInstaller برای ساخت فایل .exe
 
       - name: Upload EXE as Artifact
-        uses: actions/upload-artifact@v2  # این مرحله، فایل .exe را به عنوان یک Artifact ذخیره می‌کند
+        uses: actions/upload-artifact@v3  # تغییر نسخه به v3
         with:
           name: crypto_gui_exe  # نام Artifact
           path: dist/crypto_gui.exe  # مسیر فایل .exe که PyInstaller تولید کرده است
